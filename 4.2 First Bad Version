@@ -1,0 +1,18 @@
+class Solution:
+    def firstBadVersion(self, n: int) -> int:
+        left, right = 1, n
+        while left < right:
+            mid = left + (right - left) // 2
+            if isBadVersion(mid):
+                right = mid  # Move left to find the first bad version
+            else:
+                left = mid + 1  # Move right since mid is good
+        return left  # Left points to the first bad version
+
+# Example usage:
+# Assume isBadVersion API is defined externally
+def isBadVersion(version: int) -> bool:
+    return version >= 4  # Example: bad version starts at 4
+
+sol = Solution()
+print(sol.firstBadVersion(5))  # Output: 4
